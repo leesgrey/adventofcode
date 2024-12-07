@@ -10,6 +10,9 @@ def is_solvable(current, target, remaining_values):
   if len(remaining_values) == 0:
     return current == target
 
+  if current > target:
+    return False
+
   return is_solvable(current * remaining_values[0], target, remaining_values[1:]) or is_solvable(current + remaining_values[0], target, remaining_values[1:]) or is_solvable(int(str(current) + str(remaining_values[0])), target, remaining_values[1:])
 
 sum = 0
