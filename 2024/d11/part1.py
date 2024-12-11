@@ -7,6 +7,7 @@ def blink(stones):
   for idx, stone in enumerate(stones):
     if type(stone) is list:
       blink(stone)
+      continue
     elif stone == 0:
       stones[idx] = 1
       continue

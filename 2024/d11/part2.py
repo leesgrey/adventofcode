@@ -11,33 +11,38 @@ for stone in stones:
   else:
     stones_count[stone] = 1
 
-def increment_stone_count(stone, num):
+def add_stones(stone, num):
   global stones_count
   if stone in stones_count:
     stones_count[stone] += num
   else:
     stones_count[stone] = num
 
+def remove_stones(stone, num):
+  global stones_count
+  stones_count[stone] -= num
+  if stones_count[stone] == 0:
+    del stones_count[stone]
+
 memo = {}
 blinks = 75
 while blinks > 0:
   current_stones = stones_count.copy()
   for stone in current_stones:
-    stones_count[stone] -= current_stones[stone]
-    if stones_count[stone] == 0:
-      del stones_count[stone]
+    num = current_stones[stone]
+    remove_stones(stone, num)
     if stone in memo:
       pass
     else:
       if stone == 0:
-        increment_stone_count(1, current_stones[stone])
+        add_stones(1, num)
         continue
       num_digits = len(str(stone))
       if num_digits % 2 == 0:
-        increment_stone_count(int(str(stone)[:(num_digits // 2)]), current_stones[stone])
-        increment_stone_count(int(str(stone)[(num_digits // 2):]), current_stones[stone])
+        add_stones(int(str(stone)[:(num_digits // 2)]), num)
+        add_stones(int(str(stone)[(num_digits // 2):]), num)
       else:
-        increment_stone_count(stone * 2024, current_stones[stone])
+        add_stones(stone * 2024, num)
   blinks -= 1
 
 sum = 0
