@@ -1,5 +1,4 @@
 import heapq
-import time
 
 DIRECTIONS = [(-1, 0), (0, 1), (1, 0), (0, -1)]
 TURN_COST = 1000
@@ -33,14 +32,14 @@ class Node:
       else:
         self.g = parent.g + TURN_COST
 
-    self.h = (abs(end[0] - position[0]) ** 2) + (abs(end[1] - position[1])) ** 2
+    self.h = abs(end[0] - position[0]) + abs(end[1] - position[1])
     self.f = self.g + self.h
   
   def __eq__(self, other):
     return (self.position == other.position) and (self.direction == other.direction)
   
   def __lt__(self, other):
-    return self.g < other.g
+    return self.f < other.f
 
   def __hash__(self):
     return hash((self.position, self.direction))
@@ -54,6 +53,7 @@ closed = set()
 
 while len(open) > 0:
   current_node = heapq.heappop(open)
+  #print(current_node.g)
   closed.add(current_node)
 
   if current_node.position == end:
