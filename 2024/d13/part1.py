@@ -2,7 +2,7 @@ import re
 
 machines = []  # ((A, B), (x, y))
 
-with open('input.txt') as f:
+with open('sample.txt') as f:
     buttons = [None, None]
     for idx, line in enumerate(f):
         numbers = [int(x) for x in re.findall("[0-9]+", line)]
@@ -17,13 +17,12 @@ with open('input.txt') as f:
             case _:
                 pass
 
-#print(machines)
-
 memo = {}
 x_A = None
 y_A = None
 x_B = None
 y_B = None
+
 def get_num_coins_required(goal, cost):
     global memo, x_A, y_A, x_B, y_B
     (x_P, y_P) = goal
