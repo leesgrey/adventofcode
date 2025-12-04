@@ -9,12 +9,12 @@ for range in ranges:
     start = range[0]
     length = len(start)
     half = int(start[:(length//2)]) if length > 1 else 0
-    candidate = (half * (10 ** (length //2))) + half
+    candidate = int(str(half) * 2)
 
     while (candidate <= int(range[1])):
         if (candidate >= int(start)):
             sum += candidate
         half += 1
-        candidate = (half * (10 ** (length //2))) + half
+        candidate = int(str(half) * 2)
 
 print(sum)
